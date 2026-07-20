@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Painel elegante de horários das bolsas de Nova York, Londres e Tóquio com contadores regressivos em tempo real." />
+  <title>Global Market Hours</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header shell">
+    <a class="brand" href="#top" aria-label="Global Market Hours — início">
+      <span class="brand-mark">GM</span>
+      <span class="brand-copy">
+        <strong>Global Market Hours</strong>
+        <small>International Exchange Clock</small>
+      </span>
+    </a>
+
+    <div class="header-meta">
+      <span class="live-pulse"><i></i> Tempo real</span>
+      <span id="viewerTimezone" class="viewer-timezone">Seu fuso</span>
+    </div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="intro" aria-labelledby="pageTitle">
+      <p class="eyebrow">Nova York · Londres · Tóquio</p>
+      <h1 id="pageTitle">O ritmo dos mercados,<br /><em>segundo por segundo.</em></h1>
+      <p class="intro-copy">
+        Contagem regressiva automática para aberturas, encerramentos, leilões,
+        pré-mercado, pós-mercado e principais sessões de futuros.
+      </p>
+    </section>
+
+    <section class="world-clocks" aria-label="Relógios internacionais">
+      <article class="clock-card">
+        <span class="clock-city">Nova York</span>
+        <strong id="clock-new-york">--:--:--</strong>
+        <small id="date-new-york">---</small>
+      </article>
+      <article class="clock-card">
+        <span class="clock-city">Londres</span>
+        <strong id="clock-london">--:--:--</strong>
+        <small id="date-london">---</small>
+      </article>
+      <article class="clock-card">
+        <span class="clock-city">Tóquio</span>
+        <strong id="clock-tokyo">--:--:--</strong>
+        <small id="date-tokyo">---</small>
+      </article>
+      <article class="clock-card viewer-clock">
+        <span class="clock-city">Horário local</span>
+        <strong id="clock-viewer">--:--:--</strong>
+        <small id="date-viewer">---</small>
+      </article>
+    </section>
+
+    <section class="next-event-panel" aria-labelledby="nextEventHeading">
+      <div class="next-event-copy">
+        <div class="section-kicker">
+          <span class="ornament">◆</span>
+          <span>Próximo evento global</span>
+        </div>
+        <h2 id="nextEventHeading">Calculando o próximo evento…</h2>
+        <p id="nextEventDescription">Sincronizando os calendários internacionais.</p>
+        <div class="next-event-tags">
+          <span id="nextEventExchange" class="tag">---</span>
+          <span id="nextEventMarketTime" class="tag muted">---</span>
+          <span id="nextEventLocalTime" class="tag muted">---</span>
+        </div>
+      </div>
+
+      <div class="hero-countdown" aria-live="polite" aria-atomic="true">
+        <div class="count-unit">
+          <strong id="heroDays">00</strong>
+          <span>dias</span>
+        </div>
+        <i>:</i>
+        <div class="count-unit">
+          <strong id="heroHours">00</strong>
+          <span>horas</span>
+        </div>
+        <i>:</i>
+        <div class="count-unit">
+          <strong id="heroMinutes">00</strong>
+          <span>min</span>
+        </div>
+        <i>:</i>
+        <div class="count-unit">
+          <strong id="heroSeconds">00</strong>
+          <span>seg</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="market-overview" aria-label="Resumo dos mercados">
+      <div>
+        <span>Sessões ativas</span>
+        <strong id="activeSessionCount">0</strong>
+      </div>
+      <div>
+        <span>Próxima abertura</span>
+        <strong id="nextOpenSummary">---</strong>
+      </div>
+      <div>
+        <span>Próximo fechamento</span>
+        <strong id="nextCloseSummary">---</strong>
+      </div>
+      <div>
+        <span>Calendário</span>
+        <strong>Feriados 2026</strong>
+      </div>
+    </section>
+
+    <section class="markets-section" aria-labelledby="marketsHeading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Sessões e leilões</p>
+          <h2 id="marketsHeading">Centros financeiros</h2>
+        </div>
+        <p>Os horários abaixo são exibidos no fuso oficial de cada mercado.</p>
+      </div>
+
+      <div id="marketsGrid" class="markets-grid"></div>
+    </section>
+
+    <section class="legend" aria-label="Legenda">
+      <div><span class="legend-dot open"></span> Sessão ativa</div>
+      <div><span class="legend-dot upcoming"></span> Próxima sessão</div>
+      <div><span class="legend-dot closed"></span> Fora de horário</div>
+      <div><span class="legend-dot pause"></span> Pausa programada</div>
+    </section>
+
+    <aside class="disclaimer">
+      <span>Nota operacional</span>
+      <p>
+        O painel considera os horários regulares, horário de verão e feriados oficiais de 2026.
+        Interrupções extraordinárias, alterações intradiárias, dias especiais de derivativos e
+        regras específicas de cada ativo podem não estar refletidos.
+      </p>
+    </aside>
+  </main>
+
+  <footer class="site-footer shell">
+    <span>Global Market Hours</span>
+    <span>Built for disciplined market preparation.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
